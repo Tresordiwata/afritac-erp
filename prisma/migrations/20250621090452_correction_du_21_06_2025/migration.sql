@@ -1,0 +1,6 @@
+-- CreateEnum
+CREATE TYPE "TYPEFACTURATION" AS ENUM ('G', 'C', 'E');
+
+-- AlterTable
+ALTER TABLE "FactureImport" ADD COLUMN     "montant" DOUBLE PRECISION DEFAULT 0,
+ADD COLUMN     "typeFact" "TYPEFACTURATION" DEFAULT 'C';

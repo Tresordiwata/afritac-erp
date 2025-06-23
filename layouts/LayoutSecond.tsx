@@ -25,7 +25,7 @@ const LayoutSecond = ({
           <div className="bg-green-100 text-primary text-lg font-bold flex flex-gap items-center gap-4">{titre}</div>
         </CardBody>
       </Card>
-      <Card className="mt-8">
+      <Card className="mt-5">
         <CardBody>{children}</CardBody>
       </Card>
     </div>

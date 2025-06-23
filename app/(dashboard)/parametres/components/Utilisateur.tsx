@@ -26,7 +26,6 @@ import ModalAntReusable from "@/reusables/ModalAntReusable";
 import ModalWithForm from "@/reusables/ModalWithForm";
 import { IUtilisateur } from "@/lib/types/utilisateur";
 
-import { ISuccursale } from "@/lib/types/succursale";
 import { getUtilisateurs } from "@/services/utilisateurs";
 import ModalUsable from "@/reusables/ModalReusable";
 
@@ -61,7 +60,7 @@ let idSelected:IUtilisateur|null;
 export default function Utilisateur({ profil }: { profil?: IUtilisateur }) {
   const [spinning, setSpinning] = useState(false);
   const [spinglobal, setSpinglobal] = useState(false);
-  const [succursales, setSuccursales] = useState<ISuccursale[]>([]);
+
   const setAuth = useAuthStore((state) => state.setAuth);
 
   //  Pour Modal
@@ -163,10 +162,8 @@ export default function Utilisateur({ profil }: { profil?: IUtilisateur }) {
     }
   };
 
-  getSuccursales().then((r) => setSuccursales(r));
 
-  const ut = useQuery({ queryKey: ["utilisateurs"], queryFn: getUtilisateurs,refetchInterval:2000 })
-    .data as IUtilisateur[];
+  const ut:IUtilisateur[]=[]
 
   return (
     <div className="space-y-6">
@@ -194,13 +191,7 @@ export default function Utilisateur({ profil }: { profil?: IUtilisateur }) {
           </CardHeader>
           <CardBody>
             <div className="space-y-4">
-              <Select
-                className="max-w-md"
-                label="Selectionner Succursale"
-                labelPlacement="outside"
-              >
-                <SelectItem />
-              </Select>
+             
               <Spin spinning={spinning}>
                 <Table color="warning">
                   <TableHeader>
@@ -213,9 +204,9 @@ export default function Utilisateur({ profil }: { profil?: IUtilisateur }) {
                   <TableBody>
                     {ut?.map((utilisateur, i) => (
                       <TableRow key={i}>
-                        <TableCell>{utilisateur?.succursale?.nom}</TableCell>
-                        <TableCell>{utilisateur?.nom}</TableCell>
-                        <TableCell>{utilisateur?.email}</TableCell>
+                        <TableCell>{""}</TableCell>
+                        <TableCell>{utilisateur?.name}</TableCell>
+                        <TableCell>{utilisateur?.login}</TableCell>
                         <TableCell>{utilisateur?.role}</TableCell>
                         <TableCell className="flex items-center justify-center gap-4">
                           <Button
@@ -262,26 +253,7 @@ export default function Utilisateur({ profil }: { profil?: IUtilisateur }) {
             }
           >
             <>
-              <Select
-                isRequired
-                className=""
-                label="Succursale"
-                labelPlacement={"outside"}
-                name="succursale"
-              >
-                {succursales
-                  ?.filter((succursale) => {
-                    return (
-                      succursale.id === profil?.succursaleId ||
-                      profil?.role === "ADMIN_GENERAL"
-                    );
-                  })
-                  ?.map((succursale, i) => (
-                    <SelectItem key={succursale.id}>
-                      {succursale.nom?.toUpperCase()}
-                    </SelectItem>
-                  ))}
-              </Select>
+              
               <div className="grid grid-cols-2 gap-3">
                 <Input
                   color="primary"

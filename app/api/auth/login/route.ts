@@ -16,9 +16,9 @@ export async function POST(Request: NextRequest) {
   const {login,pwd} = await Request.json();
 
   try {
-    const user=await prisma.utilisateur.findUnique({
+    const user=await prisma.utilisateur.findFirst({
       where:{
-        email:login,
+        login:login,
         password:pwd
       },
       omit:{

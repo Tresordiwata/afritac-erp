@@ -1,11 +1,9 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Input, Select, SelectItem, Button, Card, CardBody, CardHeader } from '@heroui/react';
-import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
-import { clients, trucks, goods } from '@/lib/mock-data';
+import { useForm } from "react-hook-form";
+import { Input, Select, SelectItem, Button } from "@heroui/react";
+
+import { clients, trucks, goods } from "@/lib/mock-data";
 
 type FormData = {
   client: string;
@@ -40,137 +38,137 @@ export default function Formulaire() {
         </div>
       </div>
       <div>
-        <form onSubmit={handleSubmit(onSubmit)} className="gap-6 grid grid-cols-1 md:grid-cols-1">
-          <div className='grid grid-cols-3 gap-3'>
-          <Select
-          size='sm'
-            label="Client"
-            labelPlacement='outside'
-            placeholder="Sélectionner un client"
-            className="w-full"
-            onChange={(e) => setValue('client', e.target.value)}
-          >
-            {clients.map((client) => (
-              <SelectItem key={client.id} value={client.id.toString()}>
-                {client.name}
-              </SelectItem>
-            ))}
-          </Select>
+        <form
+          className="gap-6 grid grid-cols-1 md:grid-cols-1"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="grid grid-cols-3 gap-3">
+            <Select
+              className="w-full"
+              label="Client"
+              labelPlacement="outside"
+              placeholder="Sélectionner un client"
+              size="sm"
+              onChange={(e) => setValue("client", e.target.value)}
+            >
+              {clients.map((client) => (
+                <SelectItem key={client.id.toString()}>
+                  {client.name}
+                </SelectItem>
+              ))}
+            </Select>
 
-          <Input
-            type="text"
-            size='sm'
-            label="Numéro de manifeste"
-            labelPlacement='outside'
-            {...register('manifeste')}
-          />
+            <Input
+              label="Numéro de manifeste"
+              labelPlacement="outside"
+              size="sm"
+              type="text"
+              {...register("manifeste")}
+            />
 
-          <Input
-            type="date"
-            label="Date de facturation"
-            {...register('dateFacturation')}
-            labelPlacement='outside'
-            size='sm'
-          />
+            <Input
+              label="Date de facturation"
+              type="date"
+              {...register("dateFacturation")}
+              labelPlacement="outside"
+              size="sm "
+            />
           </div>
-           <Input
-            type="text"
+          <Input
             label="T-1"
             placeholder="T-1"
-            {...register('t1')}
+            type="text"
+            {...register("t1")}
           />
-          
 
           <Input
-            type="number"
             label="Poids"
             placeholder="Poids"
-            {...register('poids')}
+            type="number"
+            {...register("poids")}
           />
 
-         
-
           <Input
-            type="text"
             label="Déclaration"
             placeholder="Numéro de déclaration"
-            {...register('declaration')}
-          />
-
-          <Input
-            type="date"
-            label="Date de déclaration"
-            {...register('dateDeclaration')}
-          />
-
-          <Input
             type="text"
+            {...register("declaration")}
+          />
+
+          <Input
+            label="Date de déclaration"
+            type="date"
+            {...register("dateDeclaration")}
+          />
+
+          <Input
             label="Liquidation"
             placeholder="Numéro de liquidation"
-            {...register('liquidation')}
-          />
-
-          <Input
-            type="date"
-            label="Date de liquidation"
-            {...register('dateLiquidation')}
-          />
-
-          <Input
             type="text"
+            {...register("liquidation")}
+          />
+
+          <Input
+            label="Date de liquidation"
+            type="date"
+            {...register("dateLiquidation")}
+          />
+
+          <Input
             label="Quittance"
             placeholder="Numéro de quittance"
-            {...register('quittance')}
+            type="text"
+            {...register("quittance")}
           />
 
           <Input
-            type="date"
             label="Date de quittance"
-            {...register('dateQuittance')}
+            type="date"
+            {...register("dateQuittance")}
           />
 
           <Input
-            type="number"
             label="Montant quittance"
             placeholder="Montant de la quittance"
-            {...register('montantQuittance')}
+            type="number"
+            {...register("montantQuittance")}
           />
 
           <Select
+            className="w-full"
             label="Camion"
             placeholder="Sélectionner un camion"
-            className="w-full"
-            onChange={(e) => setValue('camion', e.target.value)}
+            onChange={(e) => setValue("camion", e.target.value)}
           >
             {trucks.map((truck) => (
-              <SelectItem key={truck.id} value={truck.id.toString()}>
+              <SelectItem key={truck?.id}>
                 {truck.number} - {truck.type}
               </SelectItem>
             ))}
           </Select>
 
           <Select
+            className="w-full"
             label="Marchandises"
             placeholder="Sélectionner une marchandise"
-            className="w-full"
-            onChange={(e) => setValue('marchandises', e.target.value)}
+            onChange={(e) => setValue("marchandises", e.target.value)}
           >
             {goods.map((item) => (
-              <SelectItem key={item.id} value={item.id.toString()}>
+              <SelectItem key={item.id}>
                 {item.name}
               </SelectItem>
             ))}
           </Select>
 
           <Input
-            type="number"
             label="Nombre de colis"
             placeholder="Nombre de colis"
-            {...register('nbreColis')}
+            type="number"
+            {...register("nbreColis")}
           />
 
           <div className="col-span-full mt-4">
-            <Button color="primary" type="submit" className="w-full">
+            <Button className="w-full" color="primary" type="submit">
               Soumettre
             </Button>
           </div>

@@ -12,7 +12,11 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
+model Camion{
+  id String @id @default(uuid())
+  libelle String
+  factures FactureImport[]
+}
 model Client {
   id String @id @default(uuid())
   nom_client String?
@@ -29,11 +33,69 @@ model Client {
   lastPrintedDeclation DateTime?
   enabled String? @default("A")
   paiement Paiement[]
+  journalType JournalType[]
 }
-model Facture {
-  id Int @id @default(autoincrement())
+
+model DetailFacture{
+  id String @id @default(uuid())
+  factureId String
+  facture FactureImport @relation(fields: [factureId],references: [id])
+  rubriqueFactureId String
+  rubriqueFacture RubriqueFacture @relation(fields: [rubriqueFactureId],references: [id])
+  qte Int @default(1)
+  prix Float @default(0)
+}
+
+model FactureImport {
+  id String @id @default(uuid())
+  dossier String? 
+  dateFacture DateTime?
+  journalTypeId String
+  journalType JournalType @relation(fields: [journalTypeId],references: [id])
+  manifeste String?
+  t1 String?
+  camionId String
+  camion Camion @relation(fields: [camionId],references: [id])
+  marchandiseId String
+  marchandise Marchandise @relation(fields: [marchandiseId],references: [id])
+  declarationId String?
+  declarationDate DateTime?
+  liquidationId String?
+  liquidationDate DateTime?
+  quittanceId String?
+  quittanceDate DateTime?
+  quittanceMontant Float @default(0)
+  poids String?
+  colis String?
   status STATUSFACTURE @default(B)
   createdAt DateTime @default(now())
+  detailFacture DetailFacture[]
+  montant Float? @default(0)
+  typeFact TYPEFACTURATION? @default(C)
+  niveauSaisie NIVEAUSAISIE @default(R)
+  numeroFacture String?
+}
+model Journal{
+  id String @id @default(uuid())
+  journalTypeId String?
+  journalType JournalType? @relation(fields: [journalTypeId],references: [id])
+  numero Int @default(0)
+}
+
+// Exemple : CLD, SOMIKA IMPORT
+model JournalType{
+  id String @id @default(uuid())
+  libelle String
+  journals Journal[]
+  formatJournal String
+  ClientId String
+  Client Client @relation(fields: [ClientId],references: [id])
+  FactureImport FactureImport[]
+}
+model Marchandise{
+  id String @id @default(uuid())
+  libelle String
+  factures FactureImport[]
 }
 
 model Paiement {
@@ -48,10 +110,19 @@ model Paiement {
   status StatusRow @default(A)
   numeroInvoice String? @default("")
 }
+model RubriqueFacture{
+  id String @id @default(uuid())
+  produit String?
+  libelle String?
+  identifiant String
+  compte String?
+  compteAnalytique String?
+  detailFacture DetailFacture[]
+}
 model Utilisateur {
   id    String     @id @default(uuid())
-  email String  @unique
   name  String?
+  login String
   role String @db.Char(2)
   password String?
   status StatusRow @default(A)
@@ -65,4 +136,15 @@ enum StatusRow{
   B
   D
 }
+enum TYPEFACTURATION{
+  G //Global
+  C //Consommable
+  E //Equipement
+}
+enum NIVEAUSAISIE{
+  R //Rapide
+  A //Automatique
+  N //Normale
+}
+
 

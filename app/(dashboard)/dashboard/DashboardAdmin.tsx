@@ -1,6 +1,13 @@
 "use client";
 
-import { Card, CardBody, CardHeader, Select, SelectItem } from "@heroui/react";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Select,
+  SelectItem,
+} from "@heroui/react";
 import {
   TrendingDown,
   TrendingUp,
@@ -13,18 +20,16 @@ import {
 import { useEffect, useState } from "react";
 
 import { useAuthStore } from "@/lib/store/authStore";
+import Link from "next/link";
 // import { IDashboard } from "@/lib/types/dashboard";
 // import { getDashboard } from "@/services/dashboard";
-
 
 export default function DashboardPageAdmin() {
   // const [dashboardData, setDashboardData] = useState<IDashboard | undefined>();
   const [nonCloture, setNonCloture] = useState(0);
   const utilisateur = useAuthStore((state) => state.utilisateur);
 
-  useEffect(() => {
-   
-  }, []);
+  useEffect(() => {}, []);
 
   // const { data: stats, isLoading: statsLoading } = useQuery<IDashboard>({
   //   queryKey: ['succursale-stats', utilisateur?.succursaleId],
@@ -76,7 +81,13 @@ export default function DashboardPageAdmin() {
           </p>
         </div>
         <div className="w-1/3">
-          <Select fullWidth={true} name="periode" id="periode" label="Periode dashboard" labelPlacement="outside-left">
+          <Select
+            fullWidth={true}
+            name="periode"
+            id="periode"
+            label="Periode dashboard"
+            labelPlacement="outside-left"
+          >
             <SelectItem key={"M"}>{"Mensuel"}</SelectItem>
             <SelectItem key={"Journalier"}>{"Journalier"}</SelectItem>
             <SelectItem key={"A"}>{"Annuel"}</SelectItem>
@@ -84,171 +95,172 @@ export default function DashboardPageAdmin() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="bg-white">
-          <CardBody className="flex flex-row items-center gap-4">
-            <div className="p-3 rounded-full bg-primary/10">
-              <TrendingUp className="w-6 h-6 text-primary" />
-            </div>
-            <div>
-              <p className="text-sm text-gray-500">Total Entrées</p>
-              <p className="text-xl font-bold text-success">
-                0
-          
-              </p>
-            </div>
-          </CardBody>
-        </Card>
-        <Card className="bg-white">
-          <CardBody className="flex flex-row items-center gap-4">
-            <div className="p-3 rounded-full bg-primary/10">
-              <TrendingUp className="w-6 h-6 text-primary" />
-            </div>
-            <div>
-              <p className="text-sm text-gray-500">Total Entrées</p>
-              <p className="text-xl font-bold text-success">
-                0
-              </p>
-            </div>
-          </CardBody>
-        </Card>
-
-        <Card className="bg-white">
-          <CardBody className="flex flex-row items-center gap-4">
-            <div className="p-3 rounded-full bg-danger/10">
-              <TrendingDown className="w-6 h-6 text-danger" />
-            </div>
-            <div>
-              <p className="text-sm text-gray-500">Total Dépenses</p>
-              <p className="text-xl font-bold text-danger">
-                0
-              </p>
-            </div>
-          </CardBody>
-        </Card>
-        <Card className="bg-white">
-          <CardBody className="flex flex-row items-center gap-4">
-            <div className="p-3 rounded-full bg-danger/10">
-              <TrendingDown className="w-6 h-6 text-danger" />
-            </div>
-            <div>
-              <p className="text-sm text-gray-500">Total Dépenses</p>
-              <p className="text-xl font-bold text-danger">
-                0
-              </p>
-            </div>
-          </CardBody>
-        </Card>
-
-        <Card className="bg-white">
-          <CardBody className="flex flex-row items-center gap-4">
-            <div className="p-3 rounded-full bg-success/10">
-              <CheckCircle2 className="w-6 h-6 text-success" />
-            </div>
-            <div>
-              <p className="text-sm text-gray-500">Solde</p>
-              <p
-                className={`text-xl font-bold ${0 >= 0 ? "text-success" : "text-danger"}`}
-              >
-                0
-              </p>
-            </div>
-          </CardBody>
-        </Card>
-        <Card className="bg-white">
-          <CardBody className="flex flex-row items-center gap-4">
-            <div className="p-3 rounded-full bg-success/10">
-              <CheckCircle2 className="w-6 h-6 text-success" />
-            </div>
-            <div>
-              <p className="text-sm text-gray-500">Solde</p>
-              <p
-                className={`text-xl font-bold ${0 >= 0 ? "text-success" : "text-danger"}`}
-              >
-                0
-              </p>
-            </div>
-          </CardBody>
-        </Card>
-
-        <Card className="bg-white">
-          <CardBody className="flex flex-row items-center gap-4">
-            <div className="p-3 rounded-full bg-warning/10">
-              <AlertTriangle className="w-6 h-6 text-warning" />
-            </div>
-            <div>
-              <p className="text-sm text-gray-500">Non Clôturées</p>
-              <p className="text-xl font-bold">{nonCloture || 0}</p>
-            </div>
-          </CardBody>
-        </Card>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader>
-            <h3 className="text-xl font-semibold">Activités Récentes</h3>
-          </CardHeader>
-          <CardBody>
-            <div className="space-y-4">
-              <div
-                key={1}
-                className="flex items-center justify-between border-b pb-2"
-              >
-                <div className="flex items-center gap-3">
-                  <div>
-                    <p className="font-medium" />
-                    <p className="text-sm text-gray-500" />
-                  </div>
+      <Card>
+        <CardHeader className="border-b border-b-gray-800">
+          <div className="flex gap-3">
+            <Link href={"/saisie-rapide"}>
+              <Button href="/jkdsjkdjs">Saisie rapide</Button>
+            </Link>
+            <Link href={"/facturation-liste"}>
+              <Button href="">Liste factures</Button>
+            </Link>
+          </div>
+        </CardHeader>
+        <CardBody>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="bg-white">
+              <CardBody className="flex flex-row items-center gap-4">
+                <div className="p-3 rounded-full bg-primary/10">
+                  <TrendingUp className="w-6 h-6 text-primary" />
                 </div>
-                <div className="text-right">
-                  <p className={`font-medium`}>
+                <div>
+                  <p className="text-sm text-gray-500">Total Entrées</p>
+                  <p className="text-xl font-bold text-success">0</p>
+                </div>
+              </CardBody>
+            </Card>
+            <Card className="bg-white">
+              <CardBody className="flex flex-row items-center gap-4">
+                <div className="p-3 rounded-full bg-primary/10">
+                  <TrendingUp className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">Total Entrées</p>
+                  <p className="text-xl font-bold text-success">0</p>
+                </div>
+              </CardBody>
+            </Card>
+
+            <Card className="bg-white">
+              <CardBody className="flex flex-row items-center gap-4">
+                <div className="p-3 rounded-full bg-danger/10">
+                  <TrendingDown className="w-6 h-6 text-danger" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">Total Dépenses</p>
+                  <p className="text-xl font-bold text-danger">0</p>
+                </div>
+              </CardBody>
+            </Card>
+            <Card className="bg-white">
+              <CardBody className="flex flex-row items-center gap-4">
+                <div className="p-3 rounded-full bg-danger/10">
+                  <TrendingDown className="w-6 h-6 text-danger" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">Total Dépenses</p>
+                  <p className="text-xl font-bold text-danger">0</p>
+                </div>
+              </CardBody>
+            </Card>
+
+            <Card className="bg-white">
+              <CardBody className="flex flex-row items-center gap-4">
+                <div className="p-3 rounded-full bg-success/10">
+                  <CheckCircle2 className="w-6 h-6 text-success" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">Solde</p>
+                  <p
+                    className={`text-xl font-bold ${0 >= 0 ? "text-success" : "text-danger"}`}
+                  >
                     0
                   </p>
-                  <p className="text-sm text-gray-500" />
                 </div>
-              </div>
-            </div>
-          </CardBody>
-        </Card>
+              </CardBody>
+            </Card>
+            <Card className="bg-white">
+              <CardBody className="flex flex-row items-center gap-4">
+                <div className="p-3 rounded-full bg-success/10">
+                  <CheckCircle2 className="w-6 h-6 text-success" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">Solde</p>
+                  <p
+                    className={`text-xl font-bold ${0 >= 0 ? "text-success" : "text-danger"}`}
+                  >
+                    0
+                  </p>
+                </div>
+              </CardBody>
+            </Card>
 
-        <Card>
-          <CardHeader>
-            <h3 className="text-xl font-semibold">
-              Informations Complémentaires
-            </h3>
-          </CardHeader>
-          <CardBody>
-            <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Users className="w-5 h-5 text-primary" />
-                  <span>Utilisateurs Actifs</span>
+            <Card className="bg-white">
+              <CardBody className="flex flex-row items-center gap-4">
+                <div className="p-3 rounded-full bg-warning/10">
+                  <AlertTriangle className="w-6 h-6 text-warning" />
                 </div>
-                <span className="font-bold">{""}</span>
-              </div>
+                <div>
+                  <p className="text-sm text-gray-500">Non Clôturées</p>
+                  <p className="text-xl font-bold">{nonCloture || 0}</p>
+                </div>
+              </CardBody>
+            </Card>
+          </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Calendar className="w-5 h-5 text-primary" />
-                  <span>Dépenses Planifiées</span>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader>
+                <h3 className="text-xl font-semibold">Activités Récentes</h3>
+              </CardHeader>
+              <CardBody>
+                <div className="space-y-4">
+                  <div
+                    key={1}
+                    className="flex items-center justify-between border-b pb-2"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div>
+                        <p className="font-medium" />
+                        <p className="text-sm text-gray-500" />
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className={`font-medium`}>0</p>
+                      <p className="text-sm text-gray-500" />
+                    </div>
+                  </div>
                 </div>
-                <span className="font-bold text-warning">
-                  0
-                </span>
-              </div>
+              </CardBody>
+            </Card>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Clock className="w-5 h-5 text-primary" />
-                  <span>Opérations du Jour</span>
+            <Card>
+              <CardHeader>
+                <h3 className="text-xl font-semibold">
+                  Informations Complémentaires
+                </h3>
+              </CardHeader>
+              <CardBody>
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Users className="w-5 h-5 text-primary" />
+                      <span>Utilisateurs Actifs</span>
+                    </div>
+                    <span className="font-bold">{""}</span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Calendar className="w-5 h-5 text-primary" />
+                      <span>Dépenses Planifiées</span>
+                    </div>
+                    <span className="font-bold text-warning">0</span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Clock className="w-5 h-5 text-primary" />
+                      <span>Opérations du Jour</span>
+                    </div>
+                    <span className="font-bold">{""}</span>
+                  </div>
                 </div>
-                <span className="font-bold">{""}</span>
-              </div>
-            </div>
-          </CardBody>
-        </Card>
-      </div>
+              </CardBody>
+            </Card>
+          </div>
+        </CardBody>
+      </Card>
     </div>
   );
 }

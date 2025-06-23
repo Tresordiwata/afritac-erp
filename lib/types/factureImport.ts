@@ -1,0 +1,35 @@
+import { ICamion } from "./camion";
+import { IClient } from "./client";
+import { IDetailFacture } from "./detailFacture";
+import { IJournalType } from "./journalType";
+import { IMarchandise } from "./marchandise";
+
+export type IFactureImport = {
+  id: string;
+  dossier?:string;
+  dateFacture?:string;
+  journalTypeId?: string;
+  journalType?: IJournalType;
+  manifest: string;
+  t1?: string;
+  camionId?: string;
+  camion?: ICamion;
+  marchandiseId?: string;
+  marchandise?: IMarchandise;
+  declarationId?: string;
+  declarationDate?: string;
+  liquidationId?: string;
+  liquidationDate?: string;
+  quittanceId?: string;
+  quittanceDate?: string;
+  quittanceMontant?: number;
+  poids?: string;
+  colis?: string;
+  status?: "B" | "C";
+  createdAt: string;
+  montant?: number;
+  typeFact: "G" | "C" | "E";
+  detailFacture?: IDetailFacture;
+  niveauSaisie?: "R" | "A" | "N";
+  numeroFacture?: string;
+};

@@ -23,7 +23,9 @@ import ModalWithForm from "@/reusables/ModalWithForm";
 import ModalAntReusable from "@/reusables/ModalAntReusable";
 import { useAuthStore } from "@/lib/store/authStore";
 import { IUtilisateur } from "@/lib/types/utilisateur";
-import Banque from "./components/Banque";
+import Camion from "./components/Camion";
+import Marchandise from "./components/Marchandise";
+import Journal from "./components/Journal";
 
 const profilSchema = z.object({
   email: z.string().email("Email invalide"),
@@ -49,13 +51,7 @@ const motDePasseSchema = z
 type ProfilForm = z.infer<typeof profilSchema>;
 type MotDePasseForm = z.infer<typeof motDePasseSchema>;
 
-interface Succursale {
-  id: string;
-  nom: string;
-  adresse: string;
-  telephone: string;
-  email: string;
-}
+
 let formAdd = {};
 
 export default function ParametreClientPage({
@@ -75,48 +71,6 @@ export default function ParametreClientPage({
     setModalAntAdd(modalAntAdd == null ? null : new Date());
   }, []);
   // Fin Modal
-
-  const { data: succursale } = useQuery<Succursale>({
-    queryKey: ["succursale", utilisateur?.succursaleId],
-    queryFn: async () => {
-      const response = await fetch(
-        `/api/succursales/${utilisateur?.succursaleId}`
-      );
-
-      if (!response.ok)
-        throw new Error(
-          "Erreur lors du chargement des données de la succursale"
-        );
-
-      return response.json();
-    },
-    enabled: !!utilisateur?.succursaleId,
-  });
-
-  const {
-    register: registerProfil,
-    handleSubmit: handleSubmitProfil,
-    formState: { errors: errorsProfil, isSubmitting: isSubmittingProfil },
-  } = useForm<ProfilForm>({
-    resolver: zodResolver(profilSchema),
-    defaultValues: {
-      email: utilisateur?.email,
-      nom: utilisateur?.nom,
-      prenom: utilisateur?.prenom,
-    },
-  });
-
-  const {
-    register: registerMotDePasse,
-    handleSubmit: handleSubmitMotDePasse,
-    formState: {
-      errors: errorsMotDePasse,
-      isSubmitting: isSubmittingMotDePasse,
-    },
-    reset: resetMotDePasse,
-  } = useForm<MotDePasseForm>({
-    resolver: zodResolver(motDePasseSchema),
-  });
 
   const onSubmitProfil = async (data: ProfilForm) => {
     try {
@@ -141,29 +95,6 @@ export default function ParametreClientPage({
     }
   };
 
-  const onSubmitMotDePasse = async (data: MotDePasseForm) => {
-    try {
-      const response = await fetch(
-        `/api/utilisateurs/${utilisateur?.id}/mot-de-passe`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Erreur lors de la mise à jour du mot de passe");
-      }
-
-      resetMotDePasse();
-      toast.success("Mot de passe mis à jour avec succès");
-    } catch (error) {
-      toast.error("Une erreur est survenue");
-    }
-  };
   const handleOkAnt = () => {
     // alert("ok")
   };
@@ -187,7 +118,7 @@ export default function ParametreClientPage({
           <div className="flex justify-between items-center p-3">
             <h1 className="text-2xl font-bold">Paramètres</h1>
             <span className="text-danger text-sm">
-              Login : {profil.email}, Role:{profil.role}
+              Login : {profil?.email}, Role:{profil.role}
             </span>
           </div>
         </CardBody>
@@ -204,93 +135,16 @@ export default function ParametreClientPage({
           }
         >
           <Utilisateur profil={profil} />
-        </Tab>
-
-        <Tab
-          key="securite"
-          title={
-            <div className="flex items-center gap-2">
-              <Lock className="w-4 h-4" />
-              <span>Roles</span>
-            </div>
-          }
-        >
-          <Card className="mt-4">
-            <CardHeader className="border-b border-gray-700">
-              <h2 className="text-xl font-semibold">
-                Modification du mot de passe
-              </h2>
-            </CardHeader>
-            <CardBody>
-              <form
-                className="space-y-4"
-                onSubmit={handleSubmitMotDePasse(onSubmitMotDePasse)}
-              >
-                <Input
-                  {...registerMotDePasse("ancienMotDePasse")}
-                  errorMessage={errorsMotDePasse.ancienMotDePasse?.message}
-                  label="Ancien mot de passe"
-                  type="password"
-                />
-                <Input
-                  {...registerMotDePasse("nouveauMotDePasse")}
-                  errorMessage={errorsMotDePasse.nouveauMotDePasse?.message}
-                  label="Nouveau mot de passe"
-                  type="password"
-                />
-                <Input
-                  {...registerMotDePasse("confirmationMotDePasse")}
-                  errorMessage={
-                    errorsMotDePasse.confirmationMotDePasse?.message
-                  }
-                  label="Confirmation du mot de passe"
-                  type="password"
-                />
-                <Button
-                  color="primary"
-                  isLoading={isSubmittingMotDePasse}
-                  type="submit"
-                >
-                  Modifier le mot de passe
-                </Button>
-              </form>
-            </CardBody>
-          </Card>
-        </Tab>
-
-        <Tab
-          key="rubrique"
-          title={
-            <div className="flex items-center gap-2">
-              <ChartBarBig className="w-4 h-4" />
-              <span>Rubrique</span>
-            </div>
-          }
-        >
-          <Rubrique profil={profil} />
-        </Tab>
-        <Tab
-          key="succursale"
-          title={
-            <div className="flex items-center gap-2">
-              <Building2 className="w-4 h-4" />
-              <span>Succursale</span>
-            </div>
-          }
-        >
-          <Succursale profil={profil} />
-        </Tab>
-        <Tab
-          key="banque"
-          title={
-            <div className="flex items-center gap-2">
-              <BuildingIcon className="w-4 h-4" />
-              <span>Comptes et banques</span>
-            </div>
-          }
-        >
-          <Banque profil={profil} />
-        </Tab>
+        </Tab>    
+        <Tab key={"camion"} title="Camion">
+          <Camion />
+          </Tab>   
+        <Tab key={"marchandise"} title="Marchandise">
+          <Marchandise />
+          </Tab>   
+        <Tab key={"journal"} title="Journal">
+          <Journal />
+          </Tab>   
       </Tabs>
       <div>
         <ModalWithForm
