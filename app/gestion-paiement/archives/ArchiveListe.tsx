@@ -130,10 +130,7 @@ export default function ArchiveListe() {
       <SearchOutlined style={{ color: filtered ? "#1677ff" : undefined }} />
     ),
     onFilter: (value, record) =>
-      record[dataIndex]?
-        .toString()
-        .toLowerCase()
-        .includes((value as string).toLowerCase()),
+      record[dataIndex]?.toString()?.toLowerCase()?.includes((value as string).toLowerCase()),
     filterDropdownProps: {
       onOpenChange(open) {
         if (open) {
