@@ -76,84 +76,14 @@ const ProfilPageClient = ({profil}:{profil:IUtilisateur}) => {
   return (
     <LayoutSecond titre={"Mon Compte"}>
       <>
-        <Tabs variant="bordered">
-          <Tab title="Securité">
-            <div className="grid grid-cols-2 gap-3">
-              <PageContent titre={"Mes coordonnées"}>
-                <Table >
-                  <TableHeader>
-                    <TableColumn>{""}</TableColumn>
-                    <TableColumn>{""}</TableColumn>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell>{"Nom"}</TableCell>
-                      <TableCell>{profil?.nom} {profil?.prenom}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>{"Succursale"}</TableCell>
-                      <TableCell>{profil?.succursale?.nom}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>{"Role"}</TableCell>
-                      <TableCell>{profil?.role}</TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </PageContent>
-              <PageContent titre={"Changer mon mot de passe"}>
-                <Spin
-                  indicator={<Loader2 className="animate-spin" />}
-                  spinning={spinning}
-                >
-                  <form onSubmit={handleSubmit}>
-                    <div>
-                      <Input
-                        isRequired
-                        label="Ancien mot de passe"
-                        labelPlacement="outside"
-                        name="old"
-                        type="password"
-                      />
-                      <div className="flex flex-row gap-3">
-                        <Input
-                          isRequired
-                          label="Nouveau mot de passe"
-                          labelPlacement="outside"
-                          name="newPwd"
-                          type="password"
-                        />
-                        <Input
-                          isRequired
-                          label="Retaper nouveau mot de passe"
-                          labelPlacement="outside"
-                          name="newPwd2"
-                          type="password"
-                        />
-                      </div>
-                      <div className="flex flex-row gap-4 justify-center items-center mt-4">
-                        <Button color="primary" type="submit" variant="flat">
-                          Modifier
-                        </Button>
-                        <Button type="reset" variant="faded">
-                          Annuler
-                        </Button>
-                      </div>
-                    </div>
-                  </form>
-                </Spin>
-              </PageContent>
-            </div>
-          </Tab>
-          <Tab title="Profil"></Tab>
-        </Tabs>
+       
         <ModalUsable
           isOpened={modalOpened}
           titre="Modification mot de passe"
           onOk={handleSubmitModal}
         >
           <div>{modalText}</div>
-        </ModalUsable>
+        </ModalUsable>s
       </>
     </LayoutSecond>
   );
