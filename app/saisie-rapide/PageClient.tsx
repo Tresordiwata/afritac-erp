@@ -31,15 +31,15 @@ const PageClient = () => {
   // const [camions, setCamions] = useState([]);
   const [marchandises, setMarchandises] = useState([]);
   const [camions, setCamions] = useState([]);
-  const [camionSelectedId, setCamionSelectedId] = useState();
-  const [marchandiseSelectedId, setMarchandiseSelectedId] = useState();
+  const [camionSelectedId, setCamionSelectedId] = useState<any>();
+  const [marchandiseSelectedId, setMarchandiseSelectedId] = useState<any>();
   const [newCamionValue, setNewCamionValue] = useState<String | any>("");
   const [newMarchandiseValue, setNewMarchandiseValue] = useState<String | any>(
     "",
   );
-  const [confirmSubmitForm, setConfirmSubmitForm] = useState(false);
-  const [spinning, setSpinning] = useState(false);
-  const [saving, setSaving] = useState(false);
+  const [confirmSubmitForm, setConfirmSubmitForm] = useState<boolean | any>(false);
+  const [spinning, setSpinning] = useState<boolean>(false);
+  const [saving, setSaving] = useState<boolean>(false);
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
