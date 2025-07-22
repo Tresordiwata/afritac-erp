@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { IInvoice, IInvoiceStore } from '../interfaces/invoice';
+import { IInvoice, IInvoiceStore } from '../types/invoice';
 
 export const useInvoiceStore = create<IInvoiceStore>((set) => ({
   invoices: [],
@@ -15,18 +15,18 @@ export const useInvoiceStore = create<IInvoiceStore>((set) => ({
     }),
   updateInvoice: (id, invoice) =>
     set((state) => ({
-      invoices: state.invoices.map((i) =>
-        i.id === id ? { ...i, ...invoice } : i
+      invoices: state?.invoices?.map((i) =>
+        i?.id === id ? { ...i, ...invoice } : i
       ),
     })),
   deleteInvoice: (id) =>
     set((state) => ({
-      invoices: state.invoices.filter((i) => i.id !== id),
+      invoices: state?.invoices?.filter((i) => i?.id !== id),
     })),
   archiveInvoice: (id) =>
     set((state) => ({
-      invoices: state.invoices.map((i) =>
-        i.id === id ? { ...i, archived: true } : i
+      invoices: state?.invoices?.map((i) =>
+        i?.id === id ? { ...i, archived: true } : i
       ),
     })),
   setSelectedInvoice: (invoice) =>

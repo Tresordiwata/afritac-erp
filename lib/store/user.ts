@@ -29,5 +29,5 @@ export const currentUserStore=create<CurrentUser & Action>((set)=>({
   nom:null,
   role:null,
   status:null,
-  setCurrentUser:(data)=>set(()=>({id:data.id,nom:data.nom,role:data.role,status:data.status}))
+  setCurrentUser:(data)=>set(()=>({id:data?.id,nom:data?.nom,role:data?.role,status:data?.status}))
 }))
