@@ -82,7 +82,7 @@ const ClientForm = () => {
     console.log(values);
 
     if (editingId) {
-      updateClient(editingId, { ...values, id: editingId });
+      // updateClient(editingId, { ...values, id: editingId });
       setEditingId(null);
     } else {
       setSpinning(true);

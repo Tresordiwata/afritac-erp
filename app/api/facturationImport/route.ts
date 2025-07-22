@@ -68,7 +68,7 @@ export async function POST(Request: NextRequest) {
         id: journalTypeId,
       },
     });
-    const newNumero = parseInt(numeroFacture?.numero) + 1;
+    const newNumero:any = numeroFacture?.numero || 0 + 1;
 
     await prisma.journal.update({
       data: {
