@@ -1,3 +1,4 @@
+import { string } from "zod";
 import { IClient } from "./client";
 
 export type IJournalType = {
@@ -6,6 +7,8 @@ export type IJournalType = {
   formatJournal: string;
   libelle: string;
   Client?: IClient;
+  derniereImpression?: string;
+  solde?: number
 };
 
 export type IJournalNumero = {

@@ -1,6 +1,6 @@
 import { Card, CardBody, CardHeader } from "@heroui/card";
 import React, { useEffect, useState } from "react";
-import { EllipsisVertical, Loader2 } from "lucide-react";
+import { ArrowRightFromLine, EllipsisVertical, Loader2, User } from "lucide-react";
 import {
   Dropdown,
   DropdownTrigger,
@@ -28,7 +28,7 @@ const ClientCard = ({ client }: { client: IClient }) => {
     {
       label: (
         <a
-          href="https://www.antgroup.com"
+          href="#"
           rel="noopener noreferrer"
           target="_blank"
         >
@@ -40,7 +40,7 @@ const ClientCard = ({ client }: { client: IClient }) => {
     {
       label: (
         <a
-          href="https://www.aliyun.com"
+          href="#"
           rel="noopener noreferrer"
           target="_blank"
         >
@@ -186,7 +186,8 @@ const ClientCard = ({ client }: { client: IClient }) => {
           </div>
         </CardHeader>
         <CardBody>
-          <div>NIF : {client.num_nif}</div>
+          <div className="flex gap-2 items-center"><User size={12} /> NIF : {client.num_nif}</div>
+          <div className="flex gap-2 items-center"><ArrowRightFromLine size={12} /> Date derniere impr. fact. : {client.num_nif}</div>
         </CardBody>
       </Card>
       <ModalUsable

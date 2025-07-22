@@ -19,6 +19,8 @@ export async function POST(Request: NextRequest) {
       factures = await prisma.factureImport.findMany({
         include: {
           journalType: true,
+          camion:true,
+          marchandise:true
         },
         where: {
           dateFacture: {
@@ -34,6 +36,8 @@ export async function POST(Request: NextRequest) {
       factures = await prisma.factureImport.findMany({
         include: {
           journalType: true,
+          camion:true,
+          marchandise:true
         },
         where: {
           dateFacture: {

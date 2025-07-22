@@ -73,6 +73,7 @@ import { useInvoiceStore } from "@/lib/store/invoice";
 import { Card, CardBody, CardHeader } from "@heroui/card";
 import { Grip } from "lucide-react";
 import { BACKEND_URL } from "@/lib/utils";
+import FacturationPaiement from "@/app/print/paiement_updated/FacturationPaiement";
 
 export function InvoicePreview() {
   
@@ -85,7 +86,8 @@ export function InvoicePreview() {
           <div className="text-lg flex gap-2 items-center color-primary"><Grip size={18} /> Aperçu de la facture</div>
         </CardHeader>
         <CardBody className="flex flex-col items-center justify-center min-h-[300px] text-muted-foreground">
-          <iframe sandbox="allow-scripts" src={`${BACKEND_URL}print/paiement/${selectedInvoice.id}`} style={{height:"100%", width:"100%"}} />
+          {/* <iframe sandbox="allow-scripts" src={`${BACKEND_URL}print/paiement/${selectedInvoice.id}`} style={{height:"100%", width:"100%"}} /> */}
+        <FacturationPaiement invoice={selectedInvoice} />
         </CardBody>
       </Card>
     );

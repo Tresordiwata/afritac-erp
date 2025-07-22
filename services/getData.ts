@@ -1,5 +1,5 @@
 import { IClient } from "@/lib/types/client";
-import { IInvoice } from "@/lib/types/invoice";
+import { IInvoice } from "@/lib/types/invoice"; 
 
 export const getClients = async () => {
   const request = await fetch("/api/client");

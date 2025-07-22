@@ -137,21 +137,19 @@ export default function InvoiceList() {
           </>
         </CardHeader>
         <CardBody>
-{/*            <Table>
+            <Table>
           <TableHeader>
               
-                <TableColumn>#</TableColumn>
                 <TableColumn>Date</TableColumn>
                 <TableColumn>Client</TableColumn>
                 <TableColumn className="text-center">Motif</TableColumn>
                 <TableColumn className="text-right">Montant</TableColumn>
                 <TableColumn className="text-right">Actions</TableColumn>
               
-            </TableHeader> */}
-            {/* <TableBody>
+            </TableHeader> 
+             <TableBody>
               {activeInvoices?.map((invoice) => (
                 <TableRow key={invoice.id}>
-                  <TableCell>{invoice.id}</TableCell>
                   <TableCell>
                     {moment(invoice.datePaiement).format("DD/MM/YYYY")}
                   </TableCell>
@@ -162,11 +160,12 @@ export default function InvoiceList() {
                   <TableCell className="text-right">
                     <Tag color="cyan">{invoice.montant.toFixed(2)} $</Tag>
                   </TableCell>
-                  <TableCell className="text-right">
+                  <TableCell className="text-right gap-2 flex justify-center">
                     <Button
                       size={"md"}
                       variant="ghost"
-                      onClick={() => {
+                      isIconOnly={true}
+                      onPress={() => {
                         console.log(invoice);
 
                         setSelectedInvoice(invoice);
@@ -178,6 +177,7 @@ export default function InvoiceList() {
                       size={"md"}
                       variant="ghost"
                       onPress={() => generateInvoicePDF(invoice)}
+                       isIconOnly={true}
                     >
                       <Printer className="h-4 w-4" />
                     </Button>
@@ -188,6 +188,7 @@ export default function InvoiceList() {
                         idSelected = invoice.id;
                         setShowModalArchive(true);
                       }}
+                       isIconOnly={true}
                     >
                       <Archive className="h-4 w-4" />
                     </Button>
@@ -199,6 +200,7 @@ export default function InvoiceList() {
                         setShowModalDelete(true);
                         // deleteInvoice(invoice.id)
                       }}
+                       isIconOnly={true}
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
@@ -206,7 +208,7 @@ export default function InvoiceList() {
                 </TableRow>
               ))}
             </TableBody> 
-          </Table>*/}
+          </Table>
         </CardBody>
       </Card>
       <Modal

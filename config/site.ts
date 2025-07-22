@@ -5,8 +5,9 @@ export const siteConfig = {
   description: "Application ERP pour AFRITAC SARL",
   navItems: [
     {
-      label: "Facturation Import",
-      href: "/facturation-import",
+      label: "Facturation",
+      // href: "/facturation-import",
+      href: "/facturation",
     },
     {
       label: "Paiement",

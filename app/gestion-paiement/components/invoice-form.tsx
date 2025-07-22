@@ -1,38 +1,24 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { Button } from "@heroui/button";
-
 import { Input } from "@heroui/input";
-
-import { useInvoiceStore } from "@/lib/store/invoice";
 import { Card, CardBody, CardHeader } from "@heroui/card";
-import { format } from "date-fns";
-import { fr } from "date-fns/locale";
-import {
-  Calendar as CalendarIcon,
-  Grip,
-  Loader2,
-  SaveIcon,
-} from "lucide-react";
-
-import { Popover, PopoverContent, PopoverTrigger } from "@heroui/popover";
-import { cn } from "@/lib/utils2";
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Grip, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getClients } from "@/services/getData";
-import { IClient } from "@/lib/types/client";
 import { Modal, Spin } from "antd";
 import { ToastContainer, toast } from "react-toastify";
+import { NumberInput, Select, SelectItem } from "@heroui/react";
+
+import { IClient } from "@/lib/types/client";
 import { IPaiement } from "@/lib/types/paiement";
 import { IInvoice } from "@/lib/types/invoice";
-import { Select, SelectItem } from "@heroui/react";
+import { getClients } from "@/services/getData";
+import { useInvoiceStore } from "@/lib/store/invoice";
 import { AddNoteIcon } from "@/styles/icones";
 
 let formvalues = {};
+
 export function InvoiceForm() {
   const [open, setOpen] = useState(false);
   const [spinning, setSpinning] = useState(false);
@@ -48,7 +34,11 @@ export function InvoiceForm() {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = Object.fromEntries(new FormData(e.currentTarget));
+
     setShowModalAddFacture(true);
+    // console.log(JSON.stringify(formData))
+    formvalues = { ...formData };
     // addInvoice({
     //   client: values.client,
     //   montant: values.montant,
@@ -59,6 +49,8 @@ export function InvoiceForm() {
   };
 
   const addFacture = () => {
+    const f = document?.querySelector("#f") as HTMLFormElement;
+
     fetch("/api/paiement", { method: "POST", body: JSON.stringify(formvalues) })
       .then((r) => {
         if (r.status == 201) {
@@ -70,6 +62,7 @@ export function InvoiceForm() {
           r?.json().then((r2) => {
             let facture = r2 as IPaiement;
             let inv = r2 as IInvoice;
+
             setSelectedInvoice(inv);
             // addInvoice({
             //   client: facture.client.nom_client,
@@ -78,12 +71,13 @@ export function InvoiceForm() {
             //   date: facture.datePaiment,
             // });
           });
-          const f = document?.querySelector("#f") as HTMLFormElement;
+
           f.reset();
           // addInvoice({
           //   client
           // })
         } else {
+          
           toast("Echec d'enregistrement", {
             theme: "dark",
             type: "error",
@@ -100,12 +94,13 @@ export function InvoiceForm() {
     .data as IClient[];
 
   let listeClient: { value: string; label: string }[] = [];
+
   clients?.map((cl) => {
     listeClient.push({ value: cl.id, label: cl.nom_client });
   });
 
   return (
-    <Spin spinning={spinning} indicator={<Loader2 className="animate-spin" />}>
+    <Spin indicator={<Loader2 className="animate-spin" />} spinning={spinning}>
       <ToastContainer />
       <Card>
         <CardHeader className="border-b border-gray-700">
@@ -114,28 +109,30 @@ export function InvoiceForm() {
           </div>
         </CardHeader>
         <CardBody>
-          <form onSubmit={onSubmit} className="space-y-4">
+          <form className="space-y-4" id="f" onSubmit={onSubmit}>
             <Select name="client">
-              {
-                clients?.sort((a,b)=>a.nom_client.localeCompare(b.nom_client,"fr"))?.map((client,i)=>(
-              <SelectItem key={client.id}>{client?.nom_client?.toUpperCase()}</SelectItem>
-              ))}
+              {clients
+                ?.sort((a, b) => a.nom_client.localeCompare(b.nom_client, "fr"))
+                ?.map((client, i) => (
+                  <SelectItem key={client.id}>
+                    {client?.nom_client?.toUpperCase()}
+                  </SelectItem>
+                ))}
             </Select>
-            <Input type="date" name="date" label="Date montant" />
-            <Input
-              type="number"
-              name="montant"
+            <Input label="Date montant" name="date" type="date" />
+            <NumberInput
               label="Montant"
-              placeholder="0.00"
+              min={10}
+              name="montant"             
             />
 
-            <Input name="motif" label="Motif de la facture" />
+            <Input label="Motif de la facture" name="motif" />
 
             <div className="flex gap-3">
-              <Button type="submit" color="primary">
+              <Button color="primary" type="submit">
                 <AddNoteIcon w={12} /> Créer la facture
               </Button>
-              <Button type="reset" className="bg-gray-100 text-gray-700">
+              <Button className="bg-gray-100 text-gray-700" type="reset">
                 Annuler
               </Button>
             </div>
@@ -143,10 +140,10 @@ export function InvoiceForm() {
         </CardBody>
       </Card>
       <Modal
-        okText="Enregistrer"
         cancelText="Annuler"
-        title="Ajout facture"
+        okText="Enregistrer"
         open={showModalAddFacture}
+        title="Ajout facture"
         onCancel={() => setShowModalAddFacture(false)}
         onOk={() => {
           setSpinning(true);

@@ -72,12 +72,12 @@ export const Navbar = () => {
   };
 
   return (
-    <HeroUINavbar maxWidth="xl" position="sticky" className="dark:bg-slate-800">
+    <HeroUINavbar maxWidth="xl" position="sticky" className="dark:bg-slate-800 shadow-sm dark:shadow-white">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
             <Image src={"/logo-afritac.png"} width={50} height={50} alt="logo" />
-            <p className="font-bold text-inherit">AFRITAC AGENCY</p>
+            <p className="font-bold text-inherit"></p>
           </NextLink>
         </NavbarBrand>
       </NavbarContent>

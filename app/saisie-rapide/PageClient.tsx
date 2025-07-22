@@ -24,6 +24,7 @@ import { getMarchandises } from "@/services/marchandise";
 import { IMarchandise } from "@/lib/types/marchandise";
 import { getJournalNumeros } from "@/services/journalNumero";
 import { IJournalNumero } from "@/lib/types/journalType";
+import moment from "moment";
 
 let formAdd = {};
 const PageClient = () => {
@@ -158,6 +159,7 @@ const PageClient = () => {
                 placeholder="Sélectionner un client"
                 size="sm"
                 tabIndex={0}
+                isRequired={true}
               >
                 {allClients?.map((client, i) => (
                   <SelectItem key={client.id}>
@@ -172,10 +174,13 @@ const PageClient = () => {
                 name="manifeste"
                 size="sm"
                 type="text"
+                defaultValue="2025"
+                tabIndex={0}
               />
 
-              <DatePicker
-                defaultValue={now(getLocalTimeZone())}
+              <Input
+              type="date"
+                defaultValue={moment().format("YYYY-MM-DD")}
                 label="Date de facturation"
                 labelPlacement="outside"
                 name="dateFacture"
@@ -196,6 +201,8 @@ const PageClient = () => {
                 label="Camion"
                 labelPlacement="outside"
                 size="sm"
+                unselectable="on"
+                isRequired={true}
                 onSelectionChange={(e) => {
                   setCamionSelectedId(e?.toString());
                 }}
@@ -220,6 +227,7 @@ const PageClient = () => {
                 label="Marchandise"
                 labelPlacement="outside"
                 size="sm"
+                unselectable="on"
                 onSelectionChange={(e) => {
                   setMarchandiseSelectedId(e?.toString());
                 }}
@@ -256,7 +264,8 @@ const PageClient = () => {
                     labelPlacement="outside"
                     name="declarationId"
                   />
-                  <DatePicker
+                  <Input
+                    type="date"
                     label="Déclaration"
                     labelPlacement="outside"
                     name="declarationDate"
@@ -270,7 +279,8 @@ const PageClient = () => {
                     labelPlacement="outside"
                     name="liquidationId"
                   />
-                  <DatePicker
+                  <Input 
+                    type="date"
                     label="Date Liq"
                     labelPlacement="outside"
                     name="liquidationDate"
@@ -284,7 +294,8 @@ const PageClient = () => {
                     labelPlacement="outside"
                     name="quittanceId"
                   />
-                  <DatePicker
+                  <Input
+                    type="date"
                     label="Date Quitt."
                     labelPlacement="outside"
                     name="quittanceDate"

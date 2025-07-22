@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getDashboardData } from "@/services/getData";
 import { IPaiement } from "@/lib/interfaces/paiement";
 import moment from "moment";
+import LayoutSecond from "@/layouts/LayoutSecond";
 
 interface DataType {
   key: number | undefined;
@@ -194,13 +195,8 @@ export default function ArchiveListe() {
     },
   ];
   return (
-    <div className="mx-[100px] py-8 space-y-8">
-      <h1 className="text-4xl font-bold mb-8">
-        Gestion des Factures : Archives
-        <Divider />
-      </h1>
-
+    <LayoutSecond backable={true} titre={"Gestion des Factures : Archives"}>
       <Table<DataType> columns={columns} dataSource={data} />
-    </div>
+    </LayoutSecond>
   );
 }

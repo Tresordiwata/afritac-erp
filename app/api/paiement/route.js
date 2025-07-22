@@ -41,8 +41,8 @@ export async function POST(Request) {
     const newNumber = `${numerFact.length + 1}/${currentAnneeFormatted}`;
     const transaction = await prisma.paiement.create({
       data: {
-        idClient: parseInt(client),
-        datePaiement: date,
+        idClient: client,
+        datePaiement: new Date(date),
         montant: parseFloat(montant),
         motif: motif,
         numeroInvoice: newNumber,
@@ -53,6 +53,7 @@ export async function POST(Request) {
         montant: true,
         datePaiement: true,
         motif: true,
+        numeroInvoice:true
       },
     });
 

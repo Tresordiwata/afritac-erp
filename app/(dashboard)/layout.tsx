@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
-import { useAuthStore } from "@/lib/store/authStore";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { Navbar } from "./components/navbar";
+
 import { Footer } from "./components/footer";
+
+import { useAuthStore } from "@/lib/store/authStore";
 
 export default function DashboardLayout({
   children,
@@ -16,7 +17,7 @@ export default function DashboardLayout({
 
   useEffect(() => {
     if (!utilisateur) {
-      router.push('/login');
+      // router.push('/login');
     }
   }, [utilisateur]);
 
@@ -27,7 +28,9 @@ export default function DashboardLayout({
   return (
     <div className="min-h-screen flex flex-col mb-5">
       {/* <Navbar /> */}
-      <main className="flex-1 container mx-auto px-4 py-4 mt-b">{children}</main>
+      <main className="flex-1 container mx-auto px-4 py-4 mt-b">
+        {children}
+      </main>
       <Footer />
     </div>
   );

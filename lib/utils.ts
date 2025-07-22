@@ -51,4 +51,4 @@ export function numberToWords(n: number) {
 
   return result;
 }
-export const BACKEND_URL="http://192.168.50.8:3000/"
+export const BACKEND_URL="http://localhost:3000/"

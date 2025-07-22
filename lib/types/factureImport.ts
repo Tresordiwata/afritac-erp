@@ -10,7 +10,7 @@ export type IFactureImport = {
   dateFacture?:string;
   journalTypeId?: string;
   journalType?: IJournalType;
-  manifest: string;
+  manifeste: string;
   t1?: string;
   camionId?: string;
   camion?: ICamion;
