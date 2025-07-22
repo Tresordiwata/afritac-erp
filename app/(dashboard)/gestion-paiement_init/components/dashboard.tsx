@@ -1,11 +1,13 @@
 "use client";
 
 import { useInvoiceStore } from "@/lib/store/invoice";
-import { Card, CardBody, CardHeader } from "@heroui/card";
+// import { Card,  } from "@heroui/card";
 import { Archive, BanknoteIcon, FileIcon, TrendingUpIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { getDashboardData } from "@/services/getData";
+import { Card,CardBody, CardHeader } from "@heroui/react";
+
 
 export function Dashboard() {
   const invoices = useInvoiceStore((state) => state.invoices);

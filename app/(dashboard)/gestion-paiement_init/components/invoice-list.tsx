@@ -8,8 +8,8 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from "@heroui/table";
-import { Card, CardBody, CardHeader } from "@heroui/card";
+} from "@heroui/react";
+import { Card, CardBody, CardHeader } from "@heroui/react";
 import { Archive, Eye, Grip, Loader2, Printer, Trash2 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment";

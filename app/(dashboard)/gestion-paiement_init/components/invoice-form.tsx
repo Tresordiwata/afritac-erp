@@ -3,12 +3,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Button } from "@heroui/button";
+import { Button } from "@heroui/react";
 
 import { Input } from "@heroui/input";
 
 import { useInvoiceStore } from "@/lib/store/invoice";
-import { Card, CardBody, CardHeader } from "@heroui/card";
+import { Card, CardBody, CardHeader } from "@heroui/react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import {
@@ -18,7 +18,7 @@ import {
   SaveIcon,
 } from "lucide-react";
 
-import { Popover, PopoverContent, PopoverTrigger } from "@heroui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
 import { cn } from "@/lib/utils2";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useState } from "react";

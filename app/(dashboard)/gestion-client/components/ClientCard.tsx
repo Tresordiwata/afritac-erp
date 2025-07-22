@@ -1,4 +1,4 @@
-import { Card, CardBody, CardHeader } from "@heroui/card";
+// import {  } from "@heroui/card";
 import React, { useEffect, useState } from "react";
 import { ArrowRightFromLine, EllipsisVertical, Loader2, User } from "lucide-react";
 import {
@@ -7,6 +7,7 @@ import {
   DropdownMenu,
   DropdownItem,
   Button,
+  Card, CardBody, CardHeader
 } from "@heroui/react";
 import { Spin } from "antd";
 
