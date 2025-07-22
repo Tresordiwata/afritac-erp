@@ -7,18 +7,18 @@ import * as z from "zod";
 import { format } from "date-fns";
 import { CalendarIcon, Grip, Pencil, Trash } from "lucide-react";
 import { cn } from "@/lib/utils2";
-import { Button } from "@heroui/button";
+import { Button } from "@heroui/react";
 
-import { Input } from "@heroui/input";
-import { Checkbox } from "@heroui/checkbox";
-import { Popover, PopoverContent, PopoverTrigger } from "@heroui/popover";
+import { Input } from "@heroui/react";
+import { Checkbox } from "@heroui/react";
+import { Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
 import {
   Table,
   TableBody,
   TableCell,
   TableHeader,
   TableRow,
-} from "@heroui/table";
+} from "@heroui/react";
 import { useClientStore as useClientStore2 } from "@/lib/store/client";
 import { IClient } from "@/lib/types/client";
 import { Divider, Spin, Button as btnAnt, Modal } from "antd";
