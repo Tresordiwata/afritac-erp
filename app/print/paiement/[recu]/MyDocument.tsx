@@ -270,7 +270,7 @@ const InvoicePDF = ({ invoice, user }: { invoice: IInvoice; user: string }) => {
             <Text style={{ fontSize: 12, color: "gray" }}>
               Signature du Caissier{" "}
             </Text>
-            <Text style={{ fontSize: 12 }}>{u.name}</Text>
+            <Text style={{ fontSize: 12 }}>{""}</Text>
           </View>
         </View>
       </Page>
