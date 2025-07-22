@@ -6,7 +6,7 @@ import { IClient } from "@/lib/types/client";
 import { prisma } from "@/lib/prisma";
 
 interface Props {
-  searchParams: { id?: string };
+  searchParams?: { id?: string } | any;
 }
 async function page({ searchParams }: Props) {
   const url = await searchParams?.id;
