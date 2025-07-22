@@ -71,7 +71,7 @@ export default function Formulaire() {
               type="date"
               {...register("dateFacturation")}
               labelPlacement="outside"
-              size="sm "
+              size="sm"
             />
           </div>
           <Input
