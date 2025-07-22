@@ -12,7 +12,7 @@ export const generateInvoicePDF = async (
   invoice: IInvoice,
   save: boolean = true
 ) => {
-  const doc = new jsPDF();
+  const doc:any = new jsPDF();
 
   // Configuration des couleurs et styles
   const primaryColor = "#2563eb";
