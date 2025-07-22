@@ -579,8 +579,8 @@ const FacturationimportMore = ({
                       (cl) =>
                         cl.client == facture?.journalType?.Client?.nom_client,
                     )
-                    ?.rubriques.map((rubrique) => (
-                      <View style={{ display: "flex", flexDirection: "row" }}>
+                    ?.rubriques.map((rubrique,i2) => (
+                      <View key={i2} style={{ display: "flex", flexDirection: "row" }}>
                         <Text
                           style={{
                             padding: "4 0 4 4",

@@ -221,7 +221,7 @@ const Facturationimport = ({ facture }: { facture?: IFactureImport }) => {
                   ID. NAT. N° 05-H4501-N62554G
                 </Text>
                 <Text style={styles.companyText}>
-                  903, Av. Du 30 juin, C/L'shi, LUBUMBASHI
+                  {"903, Av. Du 30 juin, C/L'shi, LUBUMBASHI"}
                 </Text>
                 <Text style={styles.companyText}>
                   République démocratique du Congo
@@ -729,7 +729,7 @@ const Facturationimport = ({ facture }: { facture?: IFactureImport }) => {
               <Text style={{fontWeight:"bold"}}>{n2words(clientRubrique?.totalNumber, { lang: "fr" })} Dollars</Text>
             </View>
             <View style={{fontSize:8, display:"flex", flexDirection:"row"}}>
-              <Text>Merci d'utiliser la communication suivante pour votre paiement: </Text>
+              <Text>{"Merci d'utiliser la communication suivante pour votre paiement: "}</Text>
               <Text style={{fontWeight:"bold"}}>{facture?.numeroFacture}</Text>
             </View>
             <View style={{marginTop:170, fontSize:6, borderTop:"2px solid #000"}}>

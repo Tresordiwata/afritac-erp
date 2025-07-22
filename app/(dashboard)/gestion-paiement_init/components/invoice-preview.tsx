@@ -85,7 +85,7 @@ export function InvoicePreview() {
           <div className="text-lg flex gap-2 items-center color-primary"><Grip size={18} /> Aperçu de la facture</div>
         </CardHeader>
         <CardBody className="flex flex-col items-center justify-center min-h-[300px] text-muted-foreground">
-          <iframe sandbox="allow-scripts" src={`${BACKEND_URL}print/paiement/${selectedInvoice.id}`} style={{height:"100%", width:"100%"}} />
+          <iframe title="preview" sandbox="allow-scripts" src={`${BACKEND_URL}print/paiement/${selectedInvoice.id}`} style={{height:"100%", width:"100%"}} />
         </CardBody>
       </Card>
     );
