@@ -129,15 +129,7 @@ export default function ArchiveListe() {
     filterIcon: (filtered: boolean) => (
       <SearchOutlined style={{ color: filtered ? "#1677ff" : undefined }} />
     ),
-    onFilter: (value, record) =>
-      record[dataIndex]?.toString()?.toLowerCase()?.includes((value as string).toLowerCase()),
-    filterDropdownProps: {
-      onOpenChange(open) {
-        if (open) {
-          setTimeout(() => searchInput.current?.select(), 100);
-        }
-      },
-    },
+    
     render: (text) =><div>{text}</div>
   });
 
