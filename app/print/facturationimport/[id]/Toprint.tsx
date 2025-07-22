@@ -10,10 +10,11 @@ import {
 } from "@react-pdf/renderer";
 import moment from "moment";
 import React from "react";
-import n2words from "n2words"
+// import n2words from "n2words"
 
 import { BACKEND_URL } from "@/lib/utils";
 import { IFactureImport } from "@/lib/types/factureImport";
+import { enLettresSansDevise } from "@/app/utils/fns";
 
 const styles = StyleSheet.create({
   page: {
@@ -722,7 +723,7 @@ const Toprint = ({ facture }: { facture?: IFactureImport }) => {
             </View>
             <View style={{fontSize:8, display:"flex", flexDirection:"row", marginTop:8}}>
               <Text>Sauf erreur de notre part, nous disons: </Text>
-              <Text style={{fontWeight:"bold"}}>{n2words(clientRubrique?.totalNumber, { lang: "fr" })} Dollars</Text>
+              <Text style={{fontWeight:"bold"}}>{enLettresSansDevise(clientRubrique?.totalNumber)} Dollars</Text>
             </View>
             <View style={{fontSize:8, display:"flex", flexDirection:"row"}}>
               <Text>{"Merci d'utiliser la communication suivante pour votre paiement: "}</Text>

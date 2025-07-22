@@ -10,10 +10,12 @@ import {
 } from "@react-pdf/renderer";
 import moment from "moment";
 import React from "react";
-import n2words from "n2words";
+// import n2words from "n2words";
+
 
 import { BACKEND_URL } from "@/lib/utils";
 import { IFactureImport } from "@/lib/types/factureImport";
+import { enLettresSansDevise } from "../utils/fns";
 
 const styles = StyleSheet.create({
   page: {
@@ -799,12 +801,11 @@ const FacturationimportMore = ({
               >
                 <Text>Sauf erreur de notre part, nous disons: </Text>
                 <Text style={{ fontWeight: "bold" }}>
-                  {n2words(
+                  {enLettresSansDevise(
                     rubriques.find(
                       (cl) =>
                         cl.client == facture?.journalType?.Client?.nom_client,
-                    )?.totalNumber,
-                    { lang: "fr" },
+                    )?.totalNumber
                   )}{" "}
                   Dollars
                 </Text>

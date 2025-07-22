@@ -8,11 +8,12 @@ import {
   Image,
 } from "@react-pdf/renderer";
 import { FileCheck } from "lucide-react";
-import { IInvoice } from "@/lib/interfaces/invoice";
+import { IInvoice } from "@/lib/types/invoice";
 import { BACKEND_URL } from "@/lib/utils";
-import n2words from "n2words";
+
 import moment from "moment";
-import { user } from "@/lib/interfaces/user";
+// import { user } from "@/lib/interfaces/user";
+import { enLettresSansDevise } from "@/app/utils/fns";
 // import { cookies } from 'next/headers';
 const styles = StyleSheet.create({
   page: {
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
 });
 
 const InvoicePDF = ({ invoice, user }: { invoice: IInvoice; user: string }) => {
-  const u = JSON.parse(user) as user;
+  // const u = JSON.parse(user) as user;
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -207,7 +208,7 @@ const InvoicePDF = ({ invoice, user }: { invoice: IInvoice; user: string }) => {
           >
             <Text style={{ fontSize: 12 }}>La somme en lettre : </Text>
             <Text style={{ fontSize: 12, fontStyle: "italic" }}>
-              {n2words(Number(invoice.montant), { lang: "fr" }).charAt(0).toUpperCase() + n2words(Number(invoice.montant), { lang: "fr" }).slice(1)} dollars
+              {enLettresSansDevise(Number(invoice.montant)).charAt(0).toUpperCase() + enLettresSansDevise(Number(invoice.montant)).slice(1)} dollars
               americains
             </Text>
           </View>
