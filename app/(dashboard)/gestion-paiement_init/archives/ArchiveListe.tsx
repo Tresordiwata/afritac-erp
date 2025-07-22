@@ -69,7 +69,8 @@ export default function ArchiveListe() {
       clearFilters,
       close,
     }) => (
-      <div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}>
+      // <div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}> Ligne a remettre en cas d'erreur
+      <div style={{ padding: 8 }}>
         <Input
           ref={searchInput}
           placeholder={`Search ${dataIndex}`}
