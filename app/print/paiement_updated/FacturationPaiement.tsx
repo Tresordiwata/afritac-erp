@@ -204,12 +204,12 @@ const FacturationPaiement = ({ invoice }: { invoice?: IInvoice }) => {
               style={{ color: "#072BAF", fontSize: 15, fontWeight: "bold" }}
             >
               Reçu N°:
-              {invoice.numeroInvoice?.length === 5
-                ? "00" + invoice.numeroInvoice
-                : invoice.numeroInvoice?.length === 4
-                  ? "000" + invoice.numeroInvoice
-                  : invoice.numeroInvoice?.length === 6
-                    ? "0" + invoice.numeroInvoice
+              {invoice?.numeroInvoice?.length === 5
+                ? "00" + invoice?.numeroInvoice
+                : invoice?.numeroInvoice?.length === 4
+                  ? "000" + invoice?.numeroInvoice
+                  : invoice?.numeroInvoice?.length === 6
+                    ? "0" + invoice?.numeroInvoice
                     : invoice?.numeroInvoice}
             </Text>
           </View>
