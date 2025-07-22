@@ -11,7 +11,7 @@ import {
   NumberInput,
   useDisclosure,
 } from "@heroui/react";
-import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
+import { Autocomplete, AutocompleteItem } from "@heroui/react";
 import { now, getLocalTimeZone } from "@internationalized/date";
 import { SaveAllIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
