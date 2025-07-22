@@ -1,8 +1,8 @@
 "use client";
 
-import { Button } from "@heroui/button";
-import { Input } from "@heroui/input";
-import { Card, CardBody, CardHeader } from "@heroui/card";
+import { Button } from "@heroui/react";
+import { Input } from "@heroui/react";
+import { Card, CardBody, CardHeader } from "@heroui/react";
 import { Grip, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";

@@ -70,7 +70,7 @@
 "use client";
 
 import { useInvoiceStore } from "@/lib/store/invoice";
-import { Card, CardBody, CardHeader } from "@heroui/card";
+import { Card, CardBody, CardHeader } from "@heroui/react";
 import { Grip } from "lucide-react";
 import { BACKEND_URL } from "@/lib/utils";
 import FacturationPaiement from "@/app/print/paiement_updated/FacturationPaiement";

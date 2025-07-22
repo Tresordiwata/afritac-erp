@@ -1,7 +1,7 @@
 "use client";
 
 import { useInvoiceStore } from "@/lib/store/invoice";
-import { Card, CardBody, CardHeader } from "@heroui/card";
+import { Card, CardBody, CardHeader } from "@heroui/react";
 import { Archive, BanknoteIcon, FileIcon, TrendingUpIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
