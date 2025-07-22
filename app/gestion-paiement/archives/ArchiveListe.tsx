@@ -4,10 +4,10 @@ import { SearchOutlined } from "@ant-design/icons";
 import type { InputRef, TableColumnsType, TableColumnType } from "antd";
 import { Button, Divider, Input, Space, Table } from "antd";
 import type { FilterDropdownProps } from "antd/es/table/interface";
-import Highlighter from "react-highlight-words";
+
 import { useQuery } from "@tanstack/react-query";
 import { getDashboardData } from "@/services/getData";
-import { IPaiement } from "@/lib/interfaces/paiement";
+import { IPaiement } from "@/lib/types/paiement";
 import moment from "moment";
 import LayoutSecond from "@/layouts/LayoutSecond";
 
@@ -130,7 +130,7 @@ export default function ArchiveListe() {
       <SearchOutlined style={{ color: filtered ? "#1677ff" : undefined }} />
     ),
     onFilter: (value, record) =>
-      record[dataIndex]
+      record[dataIndex]?
         .toString()
         .toLowerCase()
         .includes((value as string).toLowerCase()),
@@ -141,17 +141,7 @@ export default function ArchiveListe() {
         }
       },
     },
-    render: (text) =>
-      searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-          searchWords={[searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ""}
-        />
-      ) : (
-        text
-      ),
+    render: (text) =><div>{text}</div>
   });
 
   const columns: TableColumnsType<DataType> = [
