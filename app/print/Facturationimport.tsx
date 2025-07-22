@@ -192,7 +192,7 @@ const rubriques = [
     totalNumber:600
   },
 ];
-const Facturationimport = ({ facture }: { facture?: IFactureImport }) => {
+const Facturationimport = ({ facture }: { facture?: IFactureImport | any }) => {
   const clientRubrique = rubriques.find(
     (cl) => cl.client == facture?.journalType?.Client?.nom_client,
   );
