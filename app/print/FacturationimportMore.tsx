@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     textAlign: "right",
   },
   table: {
-    display: "table",
+    display: "flex",
     width: "100%",
     marginBottom: 30,
   },
