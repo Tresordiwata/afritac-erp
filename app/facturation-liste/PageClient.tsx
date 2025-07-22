@@ -65,7 +65,7 @@ const PageClient = () => {
           >
             <SelectItem key={"*"}>Tout</SelectItem>
             {clients
-              ?.sort((a, b) => a.libelle.localeCompare(b.libelle, "fr"))
+              ?.sort((a, b) => a?.libelle.localeCompare(b?.libelle, "fr"))
               ?.map((client, i) => (
                 <SelectItem key={client.id}>{client.libelle}</SelectItem>
               ))}
