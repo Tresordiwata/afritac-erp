@@ -538,8 +538,8 @@ const Facturationimport = ({ facture }: { facture?: IFactureImport }) => {
                   fontSize: 8,
                 }}
               >
-                {clientRubrique?.rubriques.map((rubrique) => (
-                  <View style={{ display: "flex", flexDirection: "row" }}>
+                {clientRubrique?.rubriques.map((rubrique,i2) => (
+                  <View key={i2} style={{ display: "flex", flexDirection: "row" }}>
                     <Text
                       style={{
                         padding: "4 0 4 4",

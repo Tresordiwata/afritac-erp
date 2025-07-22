@@ -813,7 +813,7 @@ const FacturationimportMore = ({
                 style={{ fontSize: 8, display: "flex", flexDirection: "row" }}
               >
                 <Text>
-                  Merci d'utiliser la communication suivante pour votre
+                  {"Merci d'utiliser la communication suivante pour votre"}
                   paiement:{" "}
                 </Text>
                 <Text style={{ fontWeight: "bold" }}>

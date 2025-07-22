@@ -163,7 +163,7 @@ const entete=[styles.companyText,{fontSize:8}]
                           ID. NAT. N° 05-H4501-N62554G
                         </Text>
                         <Text style={entete}>
-                          903, Av. Du 30 juin, C/L'shi, LUBUMBASHI
+                          {"903, Av. Du 30 juin, C/L'shi, LUBUMBASHI"}
                         </Text>
                       </View>
           
@@ -185,11 +185,11 @@ const entete=[styles.companyText,{fontSize:8}]
                     <Text style={{ color: "#072BAF", fontSize: 15, fontWeight: "bold" }}>
                       Reçu N°:{
                         invoice.numeroInvoice?.length===5?
-                        '00' + invoice.numeroInvoice:
+                        "00" + invoice.numeroInvoice:
                         invoice.numeroInvoice?.length === 4?
-                          '000' + invoice.numeroInvoice:
+                          "000" + invoice.numeroInvoice:
                             invoice.numeroInvoice?.length===6?
-                            '0' + invoice.numeroInvoice:
+                            "0" + invoice.numeroInvoice:
                             invoice?.numeroInvoice
                       }
                     </Text>
