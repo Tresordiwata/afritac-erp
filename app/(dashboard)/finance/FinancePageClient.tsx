@@ -2,8 +2,6 @@
 import React from "react";
 import { Alert, Tab, Tabs } from "@heroui/react";
 
-import VersementPage from "./VersementPage";
-
 import PageContent from "@/layouts/PageContent";
 import { IUtilisateur } from "@/lib/types/utilisateur";
 
@@ -19,7 +17,6 @@ const FinancePageClient = ({ profil }: { profil: IUtilisateur }) => {
           </Tab>
           <Tab key={2} title="Versement à la banque">
             <div>
-              <VersementPage profil={profil} />
             </div>
           </Tab>
           {/* <Tab key={3} title="Retrait à la banque">
