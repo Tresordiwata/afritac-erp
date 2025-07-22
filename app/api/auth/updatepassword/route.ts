@@ -17,22 +17,22 @@ export async function POST(Request: NextRequest) {
 
   try {
     const profil = JSON.parse(
-      (await cookies()).get("profil")?.value || "",
+      (await cookies()).get("profil")?.value || ""
     ) as IUtilisateur;
     const oldIsCorrect = await prisma.utilisateur.findFirst({
       where: {
-        id: profil.id.toString(),
-        motDePasse: old,
+        id: profil?.id?.toString(),
+        password: old?.toString(),
       },
     });
 
     if (oldIsCorrect) {
       await prisma.utilisateur.update({
         data: {
-          motDePasse: newPwd,
+          password: newPwd,
         },
         where: {
-          id: profil?.id.toString(),
+          id: profil?.id?.toString(),
         },
       });
 
