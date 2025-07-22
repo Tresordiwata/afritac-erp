@@ -10,12 +10,12 @@ import { getDashboardData } from "@/services/getData";
 export function Dashboard() {
   const invoices = useInvoiceStore((state) => state.invoices);
   
-  const totalAmount = invoices
-    .filter(i => !i.archived)
-    .reduce((sum, invoice) => sum + invoice.montant, 0);
+  // const totalAmount = invoices
+  //   .filter(i => !i?.archived)
+  //   .reduce((sum:any, invoice:any) => sum + invoice.montant, 0);
   
-  const activeInvoices = invoices.filter(i => !i.archived).length;
-  const archivedInvoices = invoices.filter(i => i.archived).length;
+  // const activeInvoices = invoices.filter(i => !i.archived).length;
+  // const archivedInvoices = invoices.filter(i => i.archived).length;
 
   const dashboardData=useQuery({queryKey:["dashbordData"],queryFn:getDashboardData,refetchInterval:3000}).data 
 
