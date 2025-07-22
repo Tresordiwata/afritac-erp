@@ -31,8 +31,8 @@ const PageClient = () => {
     dateEnd: "",
   });
   const [allFactures, setAllFactures] = useState<IFactureImport[]>([]);
-  const clients = useQuery({ queryKey: ["client"], queryFn: getJournalTypes })
-    .data as IJournalType[];
+  const _clients:IJournalType[] | any[] | undefined | any = useQuery({ queryKey: ["client"], queryFn: getJournalTypes })
+    ?.data as IJournalType[];
 
   const handleSubmit = () => {
     setSpinning(true);
@@ -64,10 +64,10 @@ const PageClient = () => {
             }}
           >
             <SelectItem key={"*"}>Tout</SelectItem>
-            {clients
-              ?.sort((a, b) => a?.libelle.localeCompare(b?.libelle, "fr"))
-              ?.map((client, i) => (
-                <SelectItem key={client.id}>{client.libelle}</SelectItem>
+            {_clients
+              ?.sort((a:any, b:any) => a?.libelle.localeCompare(b?.libelle, "fr"))
+              ?.map((client:any, i:any) => (
+                <SelectItem key={client?.id}>{client?.libelle}</SelectItem>
               ))}
           </Select>
           <Input
