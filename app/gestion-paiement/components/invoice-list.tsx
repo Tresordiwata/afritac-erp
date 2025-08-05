@@ -22,6 +22,7 @@ import { getClients, getPaiementNotArchived } from "@/services/getData";
 import { generateInvoicePDF } from "@/lib/pdf";
 import { useInvoiceStore } from "@/lib/store/invoice";
 import { IClient } from "@/lib/types/client";
+import { formatNombre } from "@/lib/utils";
 
 let idSelected: any = null;
 
@@ -158,7 +159,7 @@ export default function InvoiceList() {
                   </TableCell>
                   <TableCell className="text-center">{invoice.motif}</TableCell>
                   <TableCell className="text-right">
-                    <Tag color="cyan">{invoice.montant.toFixed(2)} $</Tag>
+                    <Tag color="cyan">{formatNombre(invoice.montant)} $</Tag>
                   </TableCell>
                   <TableCell className="text-right gap-2 flex justify-center">
                     <Button

@@ -1,5 +1,5 @@
 export type IRubriqueFacture={
-    id: string
+    id?: string
     produit?: string
     libelle?: string
     identifiant?: string

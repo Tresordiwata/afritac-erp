@@ -26,7 +26,7 @@ export type IFactureImport = {
   poids?: string;
   colis?: string;
   status?: "B" | "C";
-  createdAt: string;
+  createdAt: string; 
   montant?: number;
   typeFact: "G" | "C" | "E";
   detailFacture?: IDetailFacture;

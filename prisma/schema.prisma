@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output = "./node_modules/.prisma/client"
+  // output = "./node_modules/.prisma/client"
 }
 
 datasource db {
@@ -39,12 +39,9 @@ model Client {
 
 model DetailFacture{
   id String @id @default(uuid())
-  factureId String
-  facture FactureImport @relation(fields: [factureId],references: [id])
-  rubriqueFactureId String
-  rubriqueFacture RubriqueFacture @relation(fields: [rubriqueFactureId],references: [id])
-  qte Int @default(1)
-  prix Float @default(0)
+  factureId String?
+  facture FactureImport? @relation(fields: [factureId],references: [id])
+  contenu Json
 }
 
 model FactureImport {
@@ -76,6 +73,16 @@ model FactureImport {
   niveauSaisie NIVEAUSAISIE @default(R)
   numeroFacture String?
 }
+model FraisSupplementaire{
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  vehicule String?
+  montant Float @default(0)
+  devise DEVISE
+  isFactured Boolean @default(false)
+  journalTypeId String?
+  journalType JournalType? @relation(fields: [journalTypeId],references: [id])
+}
 model Journal{
   id String @id @default(uuid())
   journalTypeId String?
@@ -92,7 +99,11 @@ model JournalType{
   ClientId String
   Client Client @relation(fields: [ClientId],references: [id])
   FactureImport FactureImport[]
+  fraisAdditionnel FraisSupplementaire[]
+  paiementImport PaiementImport[]
+  referencePaiementImport ReferencePaiementImport[]
   derniereImpression String? @default("")
+  dernierImprSydonia String? @default("")
   solde Float? @default(0)
 }
 model Marchandise{
@@ -113,6 +124,29 @@ model Paiement {
   status StatusRow @default(A)
   numeroInvoice String? @default("")
 }
+model PaiementImport {
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  journalTypeId String
+  journalType JournalType @relation(fields: [journalTypeId], references: [id])
+  referencePaiementImportId String?
+  referencePaiementImport ReferencePaiementImport? @relation(fields: [referencePaiementImportId],references: [id])
+  montant Float
+  justification String?
+  fichier String?
+  datePaiement DateTime
+}
+model ReferencePaiementImport {
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  journalTypeId String?
+  journalType JournalType? @relation(fields: [journalTypeId], references: [id])
+  paiementImport PaiementImport[]
+  libelle String
+  montant Float @default(0)
+  dateReference DateTime?
+  description String?
+}
 model RubriqueFacture{
   id String @id @default(uuid())
   produit String?
@@ -120,7 +154,6 @@ model RubriqueFacture{
   identifiant String
   compte String?
   compteAnalytique String?
-  detailFacture DetailFacture[]
 }
 model Utilisateur {
   id    String     @id @default(uuid())
@@ -130,24 +163,28 @@ model Utilisateur {
   password String?
   status StatusRow @default(A)
 }
-enum STATUSFACTURE{
+enum STATUSFACTURE {
   B  //Brouillon
   C  //Comptabilisé
 }
-enum StatusRow{
+enum StatusRow {
   A
   B
   D
 }
-enum TYPEFACTURATION{
+enum TYPEFACTURATION {
   G //Global
   C //Consommable
   E //Equipement
 }
-enum NIVEAUSAISIE{
+enum NIVEAUSAISIE {
   R //Rapide
   A //Automatique
   N //Normale
+}
+enum DEVISE {
+  USD
+  CDF
 }
 
 

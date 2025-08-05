@@ -22,6 +22,7 @@ export default function ModalWithForm({
   cancelText,
   action,
   endPoint,
+  afterSubmitFn,
   beforeSubmitFn
 }: {
   isOpened: boolean;
@@ -31,6 +32,7 @@ export default function ModalWithForm({
   cancelText?: string;
   action: string;
   endPoint: string;
+  afterSubmitFn?:(arg?:any)=>void;
   beforeSubmitFn?:(arg?:any)=>void
 }) {
   const [confirmSubmitForm, setConfirmSubmitForm] = useState(false);
@@ -61,9 +63,9 @@ export default function ModalWithForm({
         {
             setConfirmSubmitForm(false)
             const formulaire=document.querySelector("#f") as HTMLFormElement;
-
             formulaire.reset()
             onOpenChange()
+            afterSubmitFn && afterSubmitFn(response)
         }
     }).catch(()=>{
         toast("Echec d'operation",{theme:"dark",type:"error"})

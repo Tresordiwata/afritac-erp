@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -13,7 +13,7 @@ import {
 } from "@heroui/react";
 import { useQuery } from "@tanstack/react-query";
 import { Spin } from "antd";
-import { Loader2, PrinterCheck, PrinterCheckIcon } from "lucide-react";
+import { FilePlus2, Loader2, PrinterCheck, PrinterCheckIcon } from "lucide-react";
 import { toast } from "react-toastify";
 import moment from "moment";
 import Link from "next/link";
@@ -22,6 +22,7 @@ import { getJournalTypes } from "@/services/journal";
 import { IJournalType } from "@/lib/types/journalType";
 import LayoutSecond from "@/layouts/LayoutSecond";
 import { IFactureImport } from "@/lib/types/factureImport";
+import { formatNombre } from "@/lib/utils";
 
 const PageClient = () => {
   const [spinning, setSpinning] = useState(false);
@@ -51,6 +52,15 @@ const PageClient = () => {
         setSpinning(false);
       });
   };
+  const getListeDefault=()=>{
+    fetch("api/reporting/factureImport").then(r=>r.json())
+    .then((r)=>{
+      setAllFactures(r)
+    })
+  }
+  useEffect(()=>{
+    getListeDefault()
+  },[])
 
   return (
     <LayoutSecond backable={true} titre={"Liste factures"}>
@@ -132,12 +142,13 @@ const PageClient = () => {
                           <th>Facture</th>
                           <th>Déclaration</th>
                           <th>Liquidation</th>
+                          <th>Montant</th>
                           <th>Opt</th>
                         </tr>
                       </thead>
                       <tbody>
                         {allFactures?.map((facture, i) => (
-                          <tr key={i} className="border-b border-gray-700">
+                          <tr key={i} className="border-b border-gray-700 hover:bg-secondary-400">
                             <td className="py-3">
                               {moment(facture?.dateFacture).format(
                                 "DD/MM/YYYY",
@@ -147,7 +158,11 @@ const PageClient = () => {
                             <td>{facture.numeroFacture}</td>
                             <td>{facture.declarationId}</td>
                             <td>{facture.liquidationId}</td>
+                            <td>{formatNombre(facture.montant)} USD</td>
                             <td className="flex gap-3 items-center justify-center pt-2">
+                              <Link href={`saisie-rapide/?datafrom=${facture.id}`}>
+                                <Button variant="flat" color="primary" isIconOnly={true} startContent={<FilePlus2 size={"14"} />} size="sm" />
+                              </Link>
                               <Link
                                 href={"/print/facturationimport/" + facture?.id}
                                 target="_blank"

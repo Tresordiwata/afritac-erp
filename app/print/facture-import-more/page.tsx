@@ -26,6 +26,7 @@ export default async function page({
             },
           },
           camion: true,
+          detailFacture: true,
           marchandise: true,
         },
         where: {
@@ -47,6 +48,7 @@ export default async function page({
             },
           },
           camion: true,
+          detailFacture: true,
           marchandise: true,
         },
         where: {
@@ -62,9 +64,20 @@ export default async function page({
     }
   } catch (error: any) {}
 
+  const rubriques: any[] = await prisma.rubriqueFacture.findMany({
+    select: {
+      id: true,
+      compte: true,
+      compteAnalytique: true,
+      identifiant: true,
+      libelle: true,
+      produit: true,
+    },
+  });
+
   return (
     <LayoutSecond titre={"Impression import"}>
-      <FacturationimportMore factures={factures} />
+      <FacturationimportMore factures={factures} rubriquesFact={rubriques} />
     </LayoutSecond>
   );
 }

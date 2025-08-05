@@ -10,6 +10,9 @@ export async function GET(Request) {
           not: "S",
         },
       },
+      orderBy:{
+        nom_client:"asc"
+      }
     });
 
     return NextResponse.json(clients, { status: 201 });

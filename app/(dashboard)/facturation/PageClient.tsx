@@ -1,12 +1,20 @@
 "use client";
-import { Button, Card, CardBody, CardFooter, CardHeader, Divider } from "@heroui/react";
-import React from "react";
+import { Button, Card, CardBody, CardHeader, Divider } from "@heroui/react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
+import {
+  ArrowLeftFromLine,
+  ArrowRightFromLineIcon,
+  FastForward,
+  ListCheckIcon,
+  PlusIcon,
+} from "lucide-react";
+
+import Detail from "./Detail";
 
 import LayoutSecond from "@/layouts/LayoutSecond";
 import { getJournalTypes } from "@/services/journal";
-import { LinkIcon, Plus } from "lucide-react";
 
 const PageClient = () => {
   const journalTypes = useQuery({
@@ -14,45 +22,61 @@ const PageClient = () => {
     queryFn: getJournalTypes,
   }).data;
 
+  useEffect(() => {
+    // setModalOpened(!modalOpened);
+  }, []);
+
   return (
     <LayoutSecond titre={"Facturation"}>
-      <Card>
-        <CardHeader className="">
-          <div className="flex gap-3">
-            <Link href={"#"}>
-              <Button color="primary">Facturer import</Button>
-            </Link>
-            <Link href={"#"}>
-              <Button color="primary">Facturer export</Button>
-            </Link>
-          </div>
-        </CardHeader>
-        <Divider />
-        <CardBody>
-          <div className="flex gap-3">
-            {journalTypes?.map((journalType, i) => (
-              <Card key={i} className="min-w-[300] light:bg-slate-300">
-                <CardHeader className="text-primary font-bold">{journalType.libelle}</CardHeader>
-                <Divider />
-                <CardBody>
-                  <div className="flex gap-2 items-center justify-start">
-                    Solde : {journalType?.solde} <LinkIcon size={12} />
-                  </div>
-                  <div className="flex gap-2 items-center justify-start">
-                    Date dern. impr : {""} <LinkIcon size={12} />
-                  </div>
-                </CardBody>
-                <Divider />
-                <CardFooter className="text-sm text-blue-300">
-                    <Link className="flex items-center gap-2" href={"#"} onClick={()=>alert("ok")}>
-                    <Plus size={12} />
-                    Nouveau paiement</Link>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
-        </CardBody>
-      </Card>
+      <>
+        <Card>
+          <CardHeader className="">
+            <div className="flex justify-between w-full">
+              <div className="flex gap-3">
+                <Link href={"/facturation/frais-supplementaire"}>
+                  <Button color="success" startContent={<PlusIcon size={15} />}>
+                    Frais suppl.
+                  </Button>
+                </Link>
+                <Link href={"#"}>
+                  <Button color="primary" startContent={<ArrowLeftFromLine />}>
+                    Facturer import
+                  </Button>
+                </Link>
+                <Link href={"#"}>
+                  <Button
+                    color="primary"
+                    startContent={<ArrowRightFromLineIcon />}
+                  >
+                    Facturer export
+                  </Button>
+                </Link>
+                <Link href={"/facturation-liste"}>
+                  <Button
+                    color="primary"
+                    startContent={<ListCheckIcon size={15} />}
+                  >
+                    Liste factures
+                  </Button>
+                </Link>
+              </div>
+              <Link href={"/saisie-rapide"}>
+                <Button color="danger" variant="solid" startContent={<FastForward size={15} />}>
+                  Saisie rapide
+                </Button>
+              </Link>
+            </div>
+          </CardHeader>
+          <Divider />
+          <CardBody>
+            <div className="flex gap-3 w-full flex-wrap">
+              {journalTypes?.map((journalType, i) => (
+                <Detail key={i} props={journalType} />
+              ))}
+            </div>
+          </CardBody>
+        </Card>
+      </>
     </LayoutSecond>
   );
 };

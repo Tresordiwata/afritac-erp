@@ -8,6 +8,7 @@ export type IJournalType = {
   libelle: string;
   Client?: IClient;
   derniereImpression?: string;
+  dernierImprSydonia?:string;
   solde?: number
 };
 

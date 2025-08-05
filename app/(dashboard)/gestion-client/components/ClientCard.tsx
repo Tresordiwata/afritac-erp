@@ -1,15 +1,20 @@
 // import {  } from "@heroui/card";
 import React, { useEffect, useState } from "react";
-import { ArrowRightFromLine, EllipsisVertical, Loader2, User } from "lucide-react";
+import { EllipsisVertical, Loader2, User } from "lucide-react";
 import {
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
   Button,
-  Card, CardBody, CardHeader
+  Card,
+  CardBody,
+  CardHeader,
+  Divider,
 } from "@heroui/react";
 import { Spin } from "antd";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 import { IClient } from "@/lib/types/client";
 import {
@@ -18,11 +23,9 @@ import {
   EditDocumentIcon,
 } from "@/styles/icones";
 import ModalUsable from "@/reusables/ModalReusable";
-import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
 
 const ClientCard = ({ client }: { client: IClient }) => {
-  const router=useRouter()
+  const router = useRouter();
   const [modalDeleteState, setModalDeleteState] = useState(false);
   const [spinning, setSpinning] = useState(false);
 
@@ -41,11 +44,13 @@ const ClientCard = ({ client }: { client: IClient }) => {
         if (r) {
           toast("Bien supprimé", { type: "success", theme: "dark" });
         }
-      }).catch(e=>{
-        toast("Echec de suppression", { type: "error", theme: "dark" });
-      }).finally(()=>{
-        setSpinning(false)
       })
+      .catch((e) => {
+        toast("Echec de suppression", { type: "error", theme: "dark" });
+      })
+      .finally(() => {
+        setSpinning(false);
+      });
   };
 
   useEffect(() => {
@@ -89,11 +94,13 @@ const ClientCard = ({ client }: { client: IClient }) => {
                   Facturer TVA
                 </DropdownItem>
                 <DropdownItem
-                  key="edit"
-                  onPress={()=>router.push(`/gestion-client/detail/?id=${client.id}`)}
+                  key="edit2"
                   className="text-success-200"
                   color="success"
                   startContent={<EditDocumentIcon className="text-success" />}
+                  onPress={() =>
+                    router.push(`/gestion-client/detail/?id=${client.id}`)
+                  }
                 >
                   Modifier
                 </DropdownItem>
@@ -111,9 +118,12 @@ const ClientCard = ({ client }: { client: IClient }) => {
             </Dropdown>
           </div>
         </CardHeader>
+        <Divider />
         <CardBody>
-          <div className="flex gap-2 items-center"><User size={12} /> NIF : {client.num_nif}</div>
-          <div className="flex gap-2 items-center"><ArrowRightFromLine size={12} /> Date derniere impr. fact. : {client.num_nif}</div>
+          <div className="flex gap-2 items-center">
+            <User size={12} /> NIF : {client.num_nif}
+          </div>
+          {/* <div className="flex gap-2 items-center"><ArrowRightFromLine size={12} /> Date derniere impr. fact. : {client.num_nif}</div> */}
         </CardBody>
       </Card>
       <ModalUsable

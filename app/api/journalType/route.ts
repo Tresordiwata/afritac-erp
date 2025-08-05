@@ -6,6 +6,9 @@ export async function GET(Request: NextRequest) {
     const jt=await prisma.journalType.findMany({
       include:{
         Client:true
+      },
+      orderBy:{
+        libelle:"asc"
       }
     })
     return NextResponse.json(jt, { status: 201 });

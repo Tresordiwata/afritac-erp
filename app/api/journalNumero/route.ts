@@ -5,9 +5,9 @@ import { prisma } from "@/lib/prisma";
 export async function GET(Request: NextRequest) {
   try {
     const jn = await prisma.journal.findMany({
-      include:{
-        journalType:true
-      }
+      include: {
+        journalType: true,
+      },
     });
 
     return NextResponse.json(jn, { status: 201 });

@@ -51,4 +51,12 @@ export function numberToWords(n: number) {
 
   return result;
 }
+export function formatNombre(valeur:any) {
+  if (isNaN(valeur)) return '0,00';
+
+  return Number(valeur)
+    .toFixed(2) // Garde deux décimales
+    .replace('.', ',') // Remplace le point décimal par une virgule
+    .replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Ajoute les points pour les milliers
+}
 export const BACKEND_URL="http://localhost:3000/"

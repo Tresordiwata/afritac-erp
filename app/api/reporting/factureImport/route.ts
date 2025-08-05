@@ -4,7 +4,20 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(Request: NextRequest) {
   try {
-    return NextResponse.json({}, { status: 201 });
+
+   const factures = await prisma.factureImport.findMany({
+        include: {
+          journalType: true,
+          camion:true,
+          marchandise:true
+        },
+        orderBy: {
+          createdAt:"desc",
+        },
+        take:50
+      });
+
+    return NextResponse.json(factures, { status: 201 });
   } catch (error: any) {
     return NextResponse.json({ error: error.toString() }, { status: 501 });
   }

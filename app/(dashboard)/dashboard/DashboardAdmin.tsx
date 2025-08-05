@@ -102,7 +102,7 @@ export default function DashboardPageAdmin() {
               <Button href="/jkdsjkdjs">Saisie rapide</Button>
             </Link>
             <Link href={"/facturation-liste"}>
-              <Button href="">Liste factures</Button>
+              <Button>Liste factures</Button>
             </Link>
           </div>
         </CardHeader>

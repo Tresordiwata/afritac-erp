@@ -20,13 +20,25 @@ export default async function page({
       journalType: {
         include: { Client: true },
       },
+      detailFacture: true,
       marchandise: true,
+    },
+  });
+
+  const rubriques = await prisma.rubriqueFacture.findMany({
+    select: {
+      id: true,
+      compte: true,
+      compteAnalytique: true,
+      identifiant: true,
+      libelle: true,
+      produit: true,
     },
   });
 
   return (
     <LayoutSecond titre={`${fact?.numeroFacture}`}>
-      <Facturationimport facture={fact} />
+      <Facturationimport facture={fact} rubriquesFact={rubriques} />
     </LayoutSecond>
   );
 }

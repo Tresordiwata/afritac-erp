@@ -113,7 +113,7 @@ export function InvoicePreview() {
         
         <div className="bg-muted p-4 rounded-lg">
           <h3 className="font-bold mb-2">CLIENT</h3>
-          <p>{selectedInvoice?.client.nom_client}</p>
+          <p>{selectedInvoice?.client?.nom_client}</p>
         </div>
         
         <div>

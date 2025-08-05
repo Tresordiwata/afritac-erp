@@ -32,52 +32,29 @@ export async function POST(Request: NextRequest) {
     quittanceId,
     quittanceMontant,
     t1,
+    detail
   } = await Request.json();
 
-  //   const fact: IFactureImport = {
-  //     createdAt: "",
-  //     id: "",
-  //     manifest: "",
-  //     typeFact: typeFact,
-  //     camionId: camionId,
-  //     colis: "",
-  //     dateFacture: "",
-  //     declarationDate: "",
-  //     declarationId: "",
-  //     dossier: "",
-  //     journalTypeId: "",
-  //     liquidationDate: "",
-  //     liquidationId: "",
-  //     marchandiseId: "",
-  //     montant: montant,
-  //     niveauSaisie: niveauSaisie,
-  //     numeroFacture: "",
-  //     poids: "",
-  //     quittanceDate: "",
-  //     quittanceId: "",
-  //     quittanceMontant: "",
-  //     status: "C",
-  //     t1: "",
-  //   };
+  
   try {
     const numeroFacture = await prisma.journal.findFirst({
       include: {
         journalType: true,
       },
       where: {
-        id: journalTypeId,
+        journalTypeId: journalTypeId,
       },
     });
     const newNumero:any = numeroFacture?.numero || 0 + 1;
 
-    await prisma.journal.update({
+    await prisma.journal.updateMany({
       data: {
         numero: {
           increment: 1,
         },
       },
       where: {
-        id: journalTypeId,
+        journalTypeId: journalTypeId,
       },
     });
 
@@ -122,8 +99,18 @@ export async function POST(Request: NextRequest) {
         t1: t1,
       },
     });
+    let detailF:any;
+    if(insertion){
+     detailF=await prisma.detailFacture.create({
+      data:{
+        contenu:detail,
+        factureId:insertion?.id
+      }
+     })
+    }
 
-    return NextResponse.json({ facture: insertion }, { status: 201 });
+
+    return NextResponse.json({ facture: insertion,detail:detailF }, { status: 201 });
   } catch (error: any) {
     return NextResponse.json({ error: error.toString() }, { status: 501 });
   }

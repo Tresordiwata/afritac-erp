@@ -1,13 +1,8 @@
-import { number } from "zod"
-import { IFactureImport } from "./factureImport"
-import { IRubriqueFacture } from "./rubriqueFacture"
+import { IFactureImport } from "./factureImport";
 
-export type IDetailFacture={
-    id:string
-    factureId : string
-    facture? : IFactureImport
-    rubriqueFactureId : string
-    rubriqueFacture : IRubriqueFacture
-    qte? : number
-    prix? : number
-}
+export type IDetailFacture = {
+  id: string;
+  factureId?: string;
+  facture?: IFactureImport;
+  contenu: JSON;
+};
